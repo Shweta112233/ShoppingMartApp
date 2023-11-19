@@ -2,7 +2,7 @@ import React from 'react';
 import {View, StyleSheet, TextInput, Button} from 'react-native';
 
 const Register = () => {
-    const [text, onChangeText] = React.useState('');
+    const [username, onChangeText] = React.useState('');
     const [password, onChangePassword] = React.useState('');
     const [newUser, onChangeNewUser] = React.useState(false);
   
@@ -12,7 +12,7 @@ const Register = () => {
         <TextInput
           style={styles.input}
           onChangeText={onChangeText}          
-          value={text}
+          value={username}
           placeholder="username"
         />
         <TextInput

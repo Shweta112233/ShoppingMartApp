@@ -1,29 +1,47 @@
+import { navigation } from '@react-navigation/native';
 import React from 'react';
-import {View, StyleSheet, TextInput, Button} from 'react-native';
+import {View, StyleSheet, TextInput, Button, Alert} from 'react-native';
 
-const Login = () => {
-    const [text, onChangeText] = React.useState('');
-    const [number, onChangeNumber] = React.useState('');
+const mockUser = {
+  username: "s",
+  password: "s"
+}
+const Login = ({ navigation }) => {
+    const [username, onChangeUserName] = React.useState('');
+    const [password, onChangepassword] = React.useState('');
     const [newUser, onChangeNewUser] = React.useState(false);
+    
+
+    const validateUserCredentials = () => {
+        if (!username || !password || username != mockUser.username || password != mockUser.password) {                
+          Alert.alert(title="Error logging in", message="Either password is incorrect or user not found");
+          // Navigate to the Register screen          
+          navigation.navigate('Register');
+        }  else {
+        
+        // Navigate to the User home screen          
+        navigation.navigate('UserHome');
+        }
+      };
 
     return (
       <View>
         <TextInput
           style={styles.input}
-          onChangeText={onChangeText}          
-          value={text}
+          onChangeText={onChangeUserName}          
+          value={username}
           placeholder="username"
         />
         <TextInput
           style={styles.input}
-          onChangeText={onChangeNumber}
-          value={number}
+          onChangeText={onChangepassword}
+          value={password}
           placeholder="password"          
         />
         <View>
           <Button title='login' onPress={() => {
-            console.log("New User");
-            onChangeNewUser(true);
+            console.log("New User");            
+            validateUserCredentials()
           }}></Button>
       </View>
       </View>
