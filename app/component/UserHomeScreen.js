@@ -8,7 +8,7 @@ const UserHomeScreen = ({ navigation }) => {
     <View>
       <View style={styles.logo}>
         <Image        
-          source={require('../../assets/S.MART.jpg')}
+          source={require('../../assets/Cart.png')}
         />
       </View>                 
       </View>         

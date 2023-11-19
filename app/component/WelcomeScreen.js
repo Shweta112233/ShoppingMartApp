@@ -11,7 +11,7 @@ const WelcomeScreen = ({navigation}) => {
       <View>
       <View style={styles.logo}>
         <Image        
-          source={require('../../assets/S.MART.jpg')}
+          source={require('../../assets/Cart.png')}
         />
       </View>      
       <Login navigation={navigation}/>  
@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
     marginTop: StatusBar.currentHeight || 0
   },  
   logo :{
-    marginTop: 100,
+    marginTop: 100,    
     alignItems: 'center'
   }
 });
