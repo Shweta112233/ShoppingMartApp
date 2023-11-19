@@ -1,19 +1,13 @@
+import { NavigationContainer } from '@react-navigation/native';
+import AppNavigator from './AppNavigator';
 import { StyleSheet, Text, View, Image, Button, SafeAreaView, Alert, StatusBar } from 'react-native';
-import Login from './app/component/Login';
-import Register from './app/component/Register';
+import React from 'react';
+
 export default function App() {
-  return (
-    <SafeAreaView style={styles.container}>  
-    <View>
-      <View style={styles.logo}>
-        <Image        
-          source={require('./assets/S.MART.jpg')}
-        />
-      </View>      
-      <Login/>  
-      <Register />       
-      </View>         
-    </SafeAreaView>
+  return (        
+    <NavigationContainer>      
+      <AppNavigator/>
+    </NavigationContainer>        
   );
 }
 
