@@ -10,3 +10,8 @@ Local Environment Setup
 5. Refer to this doc to understand how to use Expo https://reactnative.dev/docs/environment-setup
 
 For Development recommended to use https://reactnative.dev/docs/components-and-apis
+
+Basic Features to be implemented in the app
+1. Product Feed Service
+2. Search Service
+
