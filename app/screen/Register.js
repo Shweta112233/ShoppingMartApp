@@ -39,7 +39,6 @@ const Register = () => {
       margin: 12,      
       borderWidth: 1,
       padding: 10,
-      padding: 20,
     marginVertical: 8,
     marginHorizontal: 16,
     },
