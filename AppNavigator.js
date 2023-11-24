@@ -13,11 +13,11 @@ const Stack = createStackNavigator();
 const AppNavigator = () => {  
   return (     
     <Stack.Navigator>
-      <Stack.Screen name="ProductList" component={ProductList} />
+      
       <Stack.Screen name="UserHome" component={UserHomeScreen}  />      
         <Stack.Screen name="Product" component={Product}/>  
         <Stack.Screen name="Cart" component={Cart} />  
-      
+        <Stack.Screen name="ProductList" component={ProductList} />
       <Stack.Screen name="Register" component={Register} />            
       <Stack.Screen name="Login" component={Login} />                 
       <Stack.Screen name="Welcome" component={WelcomeScreen} />  
