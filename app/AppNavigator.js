@@ -7,6 +7,7 @@ import Product from './screen/Product';
 import Cart from './screen/Cart';
 import Welcome from './screen/Welcome';
 import UserHome from './screen/UserHome';
+import Logout from './component/Logout';
 
 const Stack = createStackNavigator();
 
@@ -51,6 +52,13 @@ const AppNavigator = () => {
       <Stack.Screen
         name="Login"
         component={Login}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="Logout"
+        component={Logout}
         options={{
           headerShown: false,
         }}

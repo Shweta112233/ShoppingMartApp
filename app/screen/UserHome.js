@@ -1,5 +1,5 @@
 // HomeScreen.js
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {
   SafeAreaView,
   View,
@@ -12,11 +12,13 @@ import {
 import ProductList from './ProductList';
 import SearchBar from './SearchBar';
 import {UserContext} from '../Context';
+import Logout from '../component/Logout';
 
 const UserHome = ({navigation}) => {
   const [searchPhrase, setSearchPhrase] = useState('');
   const [clicked, setClicked] = useState(false);
   const [fakeData, setFakeData] = useState();
+  const user = useContext(UserContext);
 
   // get data from the fake api endpoint
   useEffect(() => {
@@ -31,26 +33,29 @@ const UserHome = ({navigation}) => {
   }, []);
 
   return (
-    <UserContext.Provider value="user2">
-      <SafeAreaView style={styles.container}>
-        <View style={{flex: 1}}>
-          <View style={{flex: 35}}>
-            {!clicked && <Text style={styles.title}>Products list</Text>}
-            <SearchBar
-              searchPhrase={searchPhrase}
-              setSearchPhrase={setSearchPhrase}
-              clicked={clicked}
-              setClicked={setClicked}
-            />
-            <ProductList
-              searchPhrase={searchPhrase}
-              data={fakeData}
-              setClicked={setClicked}
-            />
-          </View>
+    <SafeAreaView style={styles.container}>
+      <Text>
+        Welcome {user}
+        <Logout navigation={navigation} />
+      </Text>
+
+      <View style={{flex: 1}}>
+        <View style={{flex: 35}}>
+          {!clicked && <Text style={styles.title}>Products list</Text>}
+          <SearchBar
+            searchPhrase={searchPhrase}
+            setSearchPhrase={setSearchPhrase}
+            clicked={clicked}
+            setClicked={setClicked}
+          />
+          <ProductList
+            searchPhrase={searchPhrase}
+            data={fakeData}
+            setClicked={setClicked}
+          />
         </View>
-      </SafeAreaView>
-    </UserContext.Provider>
+      </View>
+    </SafeAreaView>
   );
 };
 

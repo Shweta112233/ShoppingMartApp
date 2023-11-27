@@ -1,30 +1,23 @@
 import React from 'react';
-import {View, StyleSheet, TextInput, Button} from 'react-native';
+import {View, StyleSheet, TextInput, Button, Alert} from 'react-native';
+import auth from '@react-native-firebase/auth';
 
-const mockUser = {
-  username: 's',
-  password: 's',
-};
-const Login = ({navigation: any}) => {
+const Login = ({navigation}) => {
   const [username, onChangeUserName] = React.useState('');
   const [password, onChangepassword] = React.useState('');
 
   const validateUserCredentials = () => {
-    if (
-      !username ||
-      !password ||
-      username != mockUser.username ||
-      password != mockUser.password
-    ) {
-      // Alert.alert(
-      //   (title = 'Error logging in'),
-      //   (message = 'Either password is incorrect or user not found'),
-      // );
-      // Navigate to the Register screen
-      navigation.navigate('Register');
-    } else {
-      // Navigate to the User home screen
-      navigation.navigate('UserHome');
+    if (username && password) {
+      auth()
+        .signInWithEmailAndPassword(username, password)
+        .then((value: any) => {
+          console.log(value);
+          navigation.navigate('UserHome');
+        })
+        .catch((error: any) => {
+          console.log(error);
+          Alert.alert('something wrong');
+        });
     }
   };
 

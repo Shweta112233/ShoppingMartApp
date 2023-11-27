@@ -8,7 +8,7 @@ const Register = () => {
   const [newUser, onChangeNewUser] = React.useState(false);
 
   useEffect(() => {
-    if (newUser) {
+    if (username && password) {
       auth()
         .createUserWithEmailAndPassword(username, password)
         .then(() => {

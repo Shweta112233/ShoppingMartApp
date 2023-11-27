@@ -1,8 +1,18 @@
-import {StyleSheet, Text, View, StatusBar} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  StatusBar,
+  SafeAreaView,
+  ScrollView,
+  Image,
+} from 'react-native';
 import Login from './Login';
 import Register from './Register';
 import React, {useEffect, useState} from 'react';
 import auth from '@react-native-firebase/auth';
+import UserHome from './UserHome';
+import {UserContext} from '../Context';
 
 const Welcome = ({navigation}) => {
   // Set an initializing state whilst Firebase connects
@@ -26,16 +36,24 @@ const Welcome = ({navigation}) => {
 
   if (!user) {
     return (
-      <View>
-        <Text>Login Test</Text>
-      </View>
+      <SafeAreaView style={styles.container}>
+        <ScrollView>
+          <View>
+            <View style={styles.logo}>
+              <Image source={require('../assets/Cart.png')} />
+            </View>
+            <Login navigation={navigation} />
+            <Register />
+          </View>
+        </ScrollView>
+      </SafeAreaView>
     );
   }
 
   return (
-    <View>
-      <Text>Welcome {user.email}</Text>
-    </View>
+    <UserContext.Provider value={user.email}>
+      <UserHome />
+    </UserContext.Provider>
   );
 
   // return (
