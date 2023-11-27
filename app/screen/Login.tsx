@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, StyleSheet, TextInput, Button, Alert} from 'react-native';
+import {View, StyleSheet, TextInput, Button} from 'react-native';
 
 const mockUser = {
   username: 's',
@@ -16,10 +16,10 @@ const Login = ({navigation}) => {
       username != mockUser.username ||
       password != mockUser.password
     ) {
-      Alert.alert(
-        (title = 'Error logging in'),
-        (message = 'Either password is incorrect or user not found'),
-      );
+      // Alert.alert(
+      //   (title = 'Error logging in'),
+      //   (message = 'Either password is incorrect or user not found'),
+      // );
       // Navigate to the Register screen
       navigation.navigate('Register');
     } else {
@@ -48,7 +48,8 @@ const Login = ({navigation}) => {
           onPress={() => {
             console.log('New User');
             validateUserCredentials();
-          }}></Button>
+          }}
+        />
       </View>
     </View>
   );

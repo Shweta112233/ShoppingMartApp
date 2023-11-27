@@ -1,10 +1,32 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {View, StyleSheet, TextInput, Button} from 'react-native';
+import auth from '@react-native-firebase/auth';
 
 const Register = () => {
   const [username, onChangeText] = React.useState('');
   const [password, onChangePassword] = React.useState('');
   const [newUser, onChangeNewUser] = React.useState(false);
+
+  useEffect(() => {
+    if (newUser) {
+      auth()
+        .createUserWithEmailAndPassword(username, password)
+        .then(() => {
+          console.log('User account created & signed in!');
+        })
+        .catch(error => {
+          if (error.code === 'auth/email-already-in-use') {
+            console.log('That email address is already in use!');
+          }
+
+          if (error.code === 'auth/invalid-email') {
+            console.log('That email address is invalid!');
+          }
+
+          console.error(error);
+        });
+    }
+  }, [username, password, newUser]);
 
   return (
     <View>
@@ -29,7 +51,8 @@ const Register = () => {
           title="register"
           onPress={() => {
             onChangeNewUser(true);
-          }}></Button>
+          }}
+        />
       </View>
     </View>
   );
