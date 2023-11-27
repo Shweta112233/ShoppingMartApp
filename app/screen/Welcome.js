@@ -8,20 +8,22 @@ import {
   Image,
 } from 'react-native';
 import Login from './Login';
-import Register from './Register';
 import React, {useEffect, useState} from 'react';
 import auth from '@react-native-firebase/auth';
 import UserHome from './UserHome';
-import {UserContext} from '../Context';
+import {
+  AuthenticationContextProvider,
+  useAuthenticationContext,
+} from '../Context';
+import {Link} from '@react-navigation/native';
 
 const Welcome = ({navigation}) => {
   // Set an initializing state whilst Firebase connects
   const [initializing, setInitializing] = useState(true);
-  const [user, setUser] = useState();
+  const {authContext, setAuthContext} = useAuthenticationContext();
 
   // Handle user state changes
   function onAuthStateChanged(user) {
-    setUser(user);
     if (initializing) {
       setInitializing(false);
     }
@@ -30,11 +32,11 @@ const Welcome = ({navigation}) => {
   useEffect(() => {
     const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
     return subscriber; // unsubscribe on unmount
-  });
+  }, []);
 
   if (initializing) return null;
 
-  if (!user) {
+  if (!authContext) {
     return (
       <SafeAreaView style={styles.container}>
         <ScrollView>
@@ -43,7 +45,7 @@ const Welcome = ({navigation}) => {
               <Image source={require('../assets/Cart.png')} />
             </View>
             <Login navigation={navigation} />
-            <Register />
+            <Link to="/Register">New User?</Link>
           </View>
         </ScrollView>
       </SafeAreaView>
@@ -51,9 +53,9 @@ const Welcome = ({navigation}) => {
   }
 
   return (
-    <UserContext.Provider value={user.email}>
+    <AuthenticationContextProvider>
       <UserHome />
-    </UserContext.Provider>
+    </AuthenticationContextProvider>
   );
 
   // return (

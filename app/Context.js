@@ -1,3 +1,16 @@
-import {createContext, useContext} from 'react';
+import {createContext, useContext, useReducer, useState} from 'react';
 
-export const UserContext = createContext('shweta');
+const AuthenticationContext = createContext('');
+
+export function AuthenticationContextProvider({children}) {
+  const [authContext, setAuthContext] = useState('user');
+  return (
+    <AuthenticationContext.Provider value={{authContext, setAuthContext}}>
+      {children}
+    </AuthenticationContext.Provider>
+  );
+}
+
+export const useAuthenticationContext = () => {
+  return useContext(AuthenticationContext);
+};

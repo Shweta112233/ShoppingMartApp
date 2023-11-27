@@ -11,14 +11,14 @@ import {
 } from 'react-native';
 import ProductList from './ProductList';
 import SearchBar from './SearchBar';
-import {UserContext} from '../Context';
+import {UserContext, useAuthenticationContext} from '../Context';
 import Logout from '../component/Logout';
 
 const UserHome = ({navigation}) => {
   const [searchPhrase, setSearchPhrase] = useState('');
   const [clicked, setClicked] = useState(false);
   const [fakeData, setFakeData] = useState();
-  const user = useContext(UserContext);
+  const {user, setAuthContext} = useAuthenticationContext();
 
   // get data from the fake api endpoint
   useEffect(() => {
@@ -34,12 +34,15 @@ const UserHome = ({navigation}) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Text>
-        Welcome {user}
-        <Logout navigation={navigation} />
-      </Text>
-
       <View style={{flex: 1}}>
+        <View style={{flex: 1, flexDirection: 'row'}}>
+          <View style={{flex: 1}}>
+            <Text>Welcome {user}</Text>
+          </View>
+          <View style={{flex: 1}}>
+            <Logout navigation={navigation} />
+          </View>
+        </View>
         <View style={{flex: 35}}>
           {!clicked && <Text style={styles.title}>Products list</Text>}
           <SearchBar

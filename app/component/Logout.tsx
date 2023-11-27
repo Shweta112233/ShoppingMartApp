@@ -15,7 +15,7 @@ function Logout({navigation}): JSX.Element {
   };
   return (
     <View>
-      <Button title="logout" onPress={logoutHandler} />
+      <Button title="Logout" onPress={logoutHandler} />
     </View>
   );
 }

@@ -1,18 +1,28 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {View, StyleSheet, TextInput, Button, Alert} from 'react-native';
 import auth from '@react-native-firebase/auth';
+import {
+  AuthenticationContextProvider,
+  useAuthenticationContext,
+} from '../Context';
 
 const Login = ({navigation}) => {
   const [username, onChangeUserName] = React.useState('');
   const [password, onChangepassword] = React.useState('');
+  const [authContext, setAuthContext] = useAuthenticationContext();
+
+  useEffect(() => {
+    if (authContext) {
+      navigation.navigate('UserHome');
+    }
+  }, [authContext]);
 
   const validateUserCredentials = () => {
     if (username && password) {
       auth()
         .signInWithEmailAndPassword(username, password)
         .then((value: any) => {
-          console.log(value);
-          navigation.navigate('UserHome');
+          setAuthContext(username);
         })
         .catch((error: any) => {
           console.log(error);
@@ -22,29 +32,31 @@ const Login = ({navigation}) => {
   };
 
   return (
-    <View>
-      <TextInput
-        style={styles.input}
-        onChangeText={onChangeUserName}
-        value={username}
-        placeholder="username"
-      />
-      <TextInput
-        style={styles.input}
-        onChangeText={onChangepassword}
-        value={password}
-        placeholder="password"
-      />
+    <AuthenticationContextProvider>
       <View>
-        <Button
-          title="login"
-          onPress={() => {
-            console.log('New User');
-            validateUserCredentials();
-          }}
+        <TextInput
+          style={styles.input}
+          onChangeText={onChangeUserName}
+          value={username}
+          placeholder="username"
         />
+        <TextInput
+          style={styles.input}
+          onChangeText={onChangepassword}
+          value={password}
+          placeholder="password"
+        />
+        <View>
+          <Button
+            title="login"
+            onPress={() => {
+              console.log('New User');
+              validateUserCredentials();
+            }}
+          />
+        </View>
       </View>
-    </View>
+    </AuthenticationContextProvider>
   );
 };
 
