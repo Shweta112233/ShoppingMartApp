@@ -13,7 +13,7 @@ import ProductList from './ProductList';
 import SearchBar from './SearchBar';
 import {UserContext} from '../Context';
 
-const UserHomeScreen = ({navigation}) => {
+const UserHome = ({navigation}) => {
   const [searchPhrase, setSearchPhrase] = useState('');
   const [clicked, setClicked] = useState(false);
   const [fakeData, setFakeData] = useState();
@@ -96,4 +96,4 @@ const styles = StyleSheet.create({
     marginEnd: 20,
   },
 });
-export default UserHomeScreen;
+export default UserHome;

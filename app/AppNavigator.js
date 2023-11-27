@@ -1,12 +1,12 @@
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
-import WelcomeScreen from './screen/Welcome';
 import Login from './screen/Login';
-import UserHomeScreen from './screen/UserHome';
 import Register from './screen/Register';
 import ProductList from './screen/ProductList';
 import Product from './screen/Product';
 import Cart from './screen/Cart';
+import Welcome from './screen/Welcome';
+import UserHome from './screen/UserHome';
 
 const Stack = createStackNavigator();
 
@@ -15,7 +15,7 @@ const AppNavigator = () => {
     <Stack.Navigator initialRouteName="Welcome">
       <Stack.Screen
         name="UserHome"
-        component={UserHomeScreen}
+        component={UserHome}
         options={{
           headerShown: false,
         }}
@@ -57,7 +57,7 @@ const AppNavigator = () => {
       />
       <Stack.Screen
         name="Welcome"
-        component={WelcomeScreen}
+        component={Welcome}
         options={{
           headerShown: false,
         }}

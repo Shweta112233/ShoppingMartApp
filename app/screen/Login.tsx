@@ -5,7 +5,7 @@ const mockUser = {
   username: 's',
   password: 's',
 };
-const Login = ({navigation}) => {
+const Login = ({navigation: any}) => {
   const [username, onChangeUserName] = React.useState('');
   const [password, onChangepassword] = React.useState('');
 
